@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CourseLayoutComponent } from './components/course-layout/course-layout.component';
 import { CoursePageComponent } from './pages/course-page/course-page.component';
 import { CreateCoursePageComponent } from './pages/create-course-page/create-course-page.component';
 import { EditCoursePageComponent } from './pages/edit-course-page/edit-course-page.component';
@@ -10,10 +11,11 @@ const routes: Routes = [
   { path: '', redirectTo: '/course', pathMatch: 'full' },
   {
     path: 'course',
-    component: CoursePageComponent,
+    component: CourseLayoutComponent,
     children: [
+      { path: '', component: CoursePageComponent },
       { path: 'create', component: CreateCoursePageComponent },
-      { path: 'edit', component: EditCoursePageComponent },
+      { path: 'edit/:id', component: EditCoursePageComponent },
     ],
   },
   { path: 'login', component: LoginPageComponent },

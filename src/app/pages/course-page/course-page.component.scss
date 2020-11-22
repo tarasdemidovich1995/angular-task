@@ -1,0 +1,28 @@
+.course-page {
+  background-color: #f5f6fa;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 180px);
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__header-top {
+    margin-bottom: 20px;
+  }
+
+  &__header-bottom {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  &__content {
+    flex-grow: 1;
+  }
+}
