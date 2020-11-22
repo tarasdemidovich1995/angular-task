@@ -19,6 +19,8 @@ import { DateStyleDirective } from './directives/date-style.directive';
 import { TransMinPipe } from './pipes/trans-min.pipe';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
+import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
+import { RefDirective } from './directives/ref.directive';
 
 @NgModule({
   declarations: [
@@ -34,10 +36,12 @@ import { FilterPipe } from './pipes/filter.pipe';
     BreadcrumbsComponent,
     CourseComponent,
     CourseLayoutComponent,
+    RefDirective,
     DateStyleDirective,
     TransMinPipe,
     OrderByPipe,
     FilterPipe,
+    ConfirmModalComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],

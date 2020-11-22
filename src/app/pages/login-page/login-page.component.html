@@ -1,1 +1,29 @@
-<p>login-page works!</p>
+<div class="login-page">
+  <div class="container">
+    <form class="login-page__form">
+      <h1>Login</h1>
+      <div class="form-control">
+        <input
+          class="input"
+          type="email"
+          id="email"
+          placeholder="Your email"
+        />
+        <label for="email">Email</label>
+      </div>
+      <div class="form-control">
+        <input
+          class="input"
+          type="password"
+          id="password"
+          placeholder="Your password"
+        />
+        <label for="Your password">Password</label>
+      </div>
+      <div class="login-page__form-footer">
+        <button class="btn btn_clear">Forget password?</button>
+        <button class="btn btn_green" (click)="login()">Login</button>
+      </div>
+    </form>
+  </div>
+</div>

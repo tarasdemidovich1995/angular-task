@@ -10,7 +10,6 @@ export class DateStyleDirective {
     const freshDate = moment().day(-14);
     let icon;
     let color;
-    console.log(icon);
     if (date < currentDate && date >= freshDate) {
       color = '#67a300';
       icon = this.renderer.createText('event_available');

@@ -108,6 +108,15 @@ body {
         0 2px 5px 0 rgba(29, 30, 38, 0.15);
     }
   }
+
+  &_clear {
+    color: blue;
+    background-color: #ffffff;
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }
 
 .input {
@@ -115,7 +124,6 @@ body {
   border: 1px solid #ced0db;
   background-color: #ffffff;
   height: 36px;
-  width: 240px;
   padding: 0 10px;
   color: #ced0db;
 
@@ -130,9 +138,23 @@ body {
 
 .form-control {
   display: flex;
+  position: relative;
+  margin-top: 40px;
+  width: 100%;
+  
+  & > label {
+    position: absolute;
+    top: -25px;
+    font-weight: bold;
+    color: #474A59;
+  }
 
   & > input {
-    margin-right: 20px;
+    width: 100%;
+  }
+
+  & > .btn {
+    margin-left: 20px;
   }
 }
 

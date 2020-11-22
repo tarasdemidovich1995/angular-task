@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Course } from 'src/app/interfaces';
-import * as moment from 'moment';
+import { Component } from '@angular/core';
+import { ConfirmModalService } from 'src/app/services/confirm-modal.service';
+import { CoursesService } from 'src/app/services/courses.service';
 
 @Component({
   selector: 'app-course-page',
@@ -10,33 +10,11 @@ import * as moment from 'moment';
 export class CoursePageComponent {
   public searchField = '';
   public filterBy = '';
-  public courses: Course[] = [
-    {
-      id: '1',
-      title: 'Video course 1',
-      creationDate: moment().day(-5),
-      duration: 60,
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      topRated: true,
-    },
-    {
-      id: '2',
-      title: 'Video course 2',
-      creationDate: moment().day(+5),
-      duration: 120,
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    },
-    {
-      id: '3',
-      title: 'Video course 3',
-      creationDate: moment(),
-      duration: 180,
-      description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    },
-  ];
+
+  constructor(
+    public coursesService: CoursesService,
+    private modal: ConfirmModalService
+  ) {}
 
   searchHandler(): void {
     this.filterBy = this.searchField;
@@ -47,6 +25,8 @@ export class CoursePageComponent {
   }
 
   deleteCourse(id: string): void {
-    this.courses = this.courses.filter((course) => course.id !== id);
+    this.modal.showModal('Are you really want to delete course', () => {
+      this.coursesService.remove(id);
+    });
   }
 }

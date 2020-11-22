@@ -1,0 +1,11 @@
+<div class="backdrop"></div>
+
+<div class="confirm-modal">
+  <div class="confirm-modal__content">
+    <p>{{ title }}</p>
+  </div>
+  <div class="confirm-modal__footer">
+    <button class="btn btn_blue-big" (click)="confirm.emit()">Yes</button>
+    <button class="btn btn_blue-big" (click)="reject.emit()">No</button>
+  </div>
+</div>
