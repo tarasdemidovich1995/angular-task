@@ -15,6 +15,10 @@ import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.compo
 import { CourseComponent } from './components/course/course.component';
 import { CourseLayoutComponent } from './components/course-layout/course-layout.component';
 import { FormsModule } from '@angular/forms';
+import { DateStyleDirective } from './directives/date-style.directive';
+import { TransMinPipe } from './pipes/trans-min.pipe';
+import { OrderByPipe } from './pipes/order-by.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -30,6 +34,10 @@ import { FormsModule } from '@angular/forms';
     BreadcrumbsComponent,
     CourseComponent,
     CourseLayoutComponent,
+    DateStyleDirective,
+    TransMinPipe,
+    OrderByPipe,
+    FilterPipe,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],

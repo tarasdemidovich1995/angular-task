@@ -1,9 +1,10 @@
 export interface Course {
   id?: string;
   title: string;
-  creationDate: Date;
+  creationDate: moment.Moment;
   duration: number;
   description: string;
+  topRated?: boolean;
 }
 
 export interface User {
@@ -11,3 +12,5 @@ export interface User {
   firstName: string;
   lastName: string;
 }
+
+export type Direction = 'direct' | 'reverse';
