@@ -40,16 +40,17 @@ export class CoursesService {
 
   }
 
-  create(): void {
-
+  create(course: Course): void {
+    this.list.push(course);
   }
 
-  getById(): void {
-
+  getById(id: string): Course {
+    return this.list.find((course) => course.id === id);
   }
 
   update(course: Course): void {
-    this.list.push(course);
+    const index = this.list.findIndex((item) => item.id === course.id);
+    this.list[index] = course;
   }
 
   remove(id: string): void {

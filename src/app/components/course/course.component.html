@@ -23,7 +23,7 @@
     </p>
     <button
       class="btn btn_blue-small"
-      [routerLink]="['/course/edit', course.id]"
+      (click)="goToCourse()"
     >
       <i class="material-icons">edit</i>
       Edit

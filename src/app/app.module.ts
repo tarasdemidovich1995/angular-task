@@ -21,6 +21,8 @@ import { OrderByPipe } from './pipes/order-by.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 import { RefDirective } from './directives/ref.directive';
+import { MyTitleCasePipe } from './pipes/my-title-case.pipe';
+import { AuthGuard } from './services/auth.guard';
 
 @NgModule({
   declarations: [
@@ -42,9 +44,10 @@ import { RefDirective } from './directives/ref.directive';
     OrderByPipe,
     FilterPipe,
     ConfirmModalComponent,
+    MyTitleCasePipe,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

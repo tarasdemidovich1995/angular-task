@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   template: `
     <div class="logo">
       <i class="material-icons logo__icon">play_circle_outline</i>
-      <a class="logo__title" [routerLink]="['/course']">video course</a>
+      <a class="logo__title" [routerLink]="['/courses']">video course</a>
     </div>
   `,
   styles: [

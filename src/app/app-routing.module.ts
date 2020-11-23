@@ -6,17 +6,19 @@ import { CreateCoursePageComponent } from './pages/create-course-page/create-cou
 import { EditCoursePageComponent } from './pages/edit-course-page/edit-course-page.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/course', pathMatch: 'full' },
+  { path: '', redirectTo: '/courses', pathMatch: 'full' },
   {
-    path: 'course',
+    path: 'courses',
     component: CourseLayoutComponent,
     children: [
       { path: '', component: CoursePageComponent },
-      { path: 'create', component: CreateCoursePageComponent },
-      { path: 'edit/:id', component: EditCoursePageComponent },
+      { path: 'new', component: CreateCoursePageComponent },
+      { path: ':id', component: EditCoursePageComponent },
     ],
+    canActivate: [AuthGuard],
   },
   { path: 'login', component: LoginPageComponent },
   { path: 'error', component: ErrorPageComponent },
@@ -24,7 +26,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

@@ -16,6 +16,6 @@ export class LoginPageComponent {
 
   login(): void {
     this.authService.login();
-    this.router.navigate(['/course']);
+    this.router.navigate(['/courses']);
   }
 }

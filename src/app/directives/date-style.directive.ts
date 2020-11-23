@@ -7,7 +7,7 @@ import * as moment from 'moment';
 export class DateStyleDirective {
   @Input() set appDateStyle(date: moment.Moment) {
     const currentDate = moment();
-    const freshDate = moment().day(-14);
+    const freshDate = moment().subtract(14, 'days');
     let icon;
     let color;
     if (date < currentDate && date >= freshDate) {

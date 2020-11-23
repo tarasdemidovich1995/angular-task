@@ -21,14 +21,14 @@ export class CreateCoursePageComponent {
 
   public save(): void {
     if (this.title && this.description && this.duration && this.creationDate) {
-      this.coursesService.update({
+      this.coursesService.create({
         title: this.title,
         description: this.description,
         duration: this.duration,
         creationDate: moment(this.creationDate),
         id: `${Math.random()}`
       });
-      this.router.navigate(['/course']);
+      this.router.navigate(['/courses']);
     }
   }
 }
