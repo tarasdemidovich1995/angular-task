@@ -1,3 +1,4 @@
+@import "https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap";
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
 *,
@@ -12,13 +13,16 @@
 
 body {
   margin: 0;
+  font-family: 'Source Sans Pro', sans-serif;
   font-size: 14px;
 }
 
 .btn {
+  padding: 0;
   border: 0;
   outline: 0;
   cursor: pointer;
+  background-color: transparent;
 
   &_white {
     color: rgba($color: #fff, $alpha: 1);
@@ -107,6 +111,7 @@ body {
       box-shadow: 0 1px 2px 0 rgba(29, 30, 38, 0.1),
         0 2px 5px 0 rgba(29, 30, 38, 0.15);
     }
+
   }
 
   &_clear {
@@ -117,22 +122,33 @@ body {
       text-decoration: none;
     }
   }
-}
 
-.input {
-  border-radius: 3px;
-  border: 1px solid #ced0db;
-  background-color: #ffffff;
-  height: 36px;
-  padding: 0 10px;
-  color: #ced0db;
+  &_gray {
+    border-radius: 3px;
+	  border: 1px solid #ACAFBF;
+    box-sizing: border-box;
+    color: #ACAFBF;
+	  border-width: 1px;
+	  border-style: solid;
+    height: 36px;
+    width: 70px;
+    background-color: transparent;
 
-  &:focus {
-    outline: none;
+    &:hover {
+      border: 1px solid #474A59;
+      color: #474A59;
+    }
   }
 
-  &::placeholder {
-    color: #ced0db;
+  &_modal-close {
+    background-color: transparent;
+    color: #ACAFBF;
+    &:hover {
+      color: #474A59;
+    }
+    .materail-icons {
+      font-size: 28px;
+    }
   }
 }
 
@@ -141,19 +157,71 @@ body {
   position: relative;
   margin-top: 40px;
   width: 100%;
+  z-index: 1;
+  color: #474A59;
   
-  & > label {
+  &_course-page {
+    margin: 0;
+  }
+
+  &_small {
+    width: 150px;
+  }
+
+  &_medium {
+    width: 320px;
+  }
+  
+  &__label {
     position: absolute;
-    top: -25px;
+    top: -5px;
     font-weight: bold;
-    color: #474A59;
+    transform: translateY(-100%);
+    line-height: 18px;
   }
 
-  & > input {
+  &__info {
+    position: absolute;
+    right: 0;
+    top: -5px;
+    transform: translateY(-100%);
+    line-height: 18px;
+  }
+  
+  &__input, &__textarea {
     width: 100%;
+    border-radius: 3px;
+    border: 1px solid #ced0db;
+    background-color: #ffffff;
+    color: #ced0db;
+    font-family: inherit;
+    font-size: 14px;
+    
+    &:focus {
+      outline: none;
+    }
+    
+    &::placeholder {
+      color: #ced0db;
+    }
+  }
+  
+  &__input {
+    height: 36px;
+    padding: 0 10px;
+
+    &_course-page {
+      width: 240px;
+    }
   }
 
-  & > .btn {
+  &__textarea {
+    height: 108px;
+    padding: 10px;
+    resize: none;
+  }
+
+  &__btn {
     margin-left: 20px;
   }
 }

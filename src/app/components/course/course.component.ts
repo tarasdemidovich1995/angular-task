@@ -13,11 +13,11 @@ import { Course } from 'src/app/interfaces';
 })
 export class CourseComponent {
   @Input() course: Course;
-  @Output() onDelete = new EventEmitter<string>();
+  @Output() onDelete = new EventEmitter<Course>();
 
   constructor() {}
 
   deleteHandler(): void {
-    this.onDelete.emit(this.course.id);
+    this.onDelete.emit(this.course);
   }
 }

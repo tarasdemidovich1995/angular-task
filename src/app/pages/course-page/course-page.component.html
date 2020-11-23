@@ -2,20 +2,20 @@
   <div class="container">
     <div class="course-page__header">
       <div class="course-page__header-top">
-        <div class="form-control">
+        <div class="form-control form-control_course-page">
           <input
-            class="input"
+            class="form-control__input form-control__input_course-page"
             type="text"
             placeholder="Type to search"
             [(ngModel)]="searchField"
           />
-          <button type="button" class="btn btn_green" (click)="searchHandler()">
+          <button type="button" class="form-control__btn btn btn_green" (click)="searchHandler()">
             Search
           </button>
         </div>
       </div>
       <div class="course-page__header-bottom">
-        <button class="btn btn_blue-big">
+        <button class="btn btn_blue-big" [routerLink]="['/course', 'create']">
           <i class="material-icons">add_circle_outline</i>
           Add course
         </button>

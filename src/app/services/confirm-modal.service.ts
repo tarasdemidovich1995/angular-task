@@ -14,10 +14,11 @@ export class ConfirmModalService {
     this.dir = dir;
   }
 
-  showModal(title: string, confirm: () => void): void {
+  showModal(title: string, text: string, confirm: () => void): void {
     const modalFactory = this.resolver.resolveComponentFactory(ConfirmModalComponent);
     const component = this.dir.containerRef.createComponent(modalFactory);
     component.instance.title = title;
+    component.instance.text = text;
     component.instance.confirm.subscribe(() => {
       confirm();
       this.dir.containerRef.clear();

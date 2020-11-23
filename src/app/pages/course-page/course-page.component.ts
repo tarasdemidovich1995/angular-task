@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Course } from 'src/app/interfaces';
 import { ConfirmModalService } from 'src/app/services/confirm-modal.service';
 import { CoursesService } from 'src/app/services/courses.service';
 
@@ -24,9 +25,13 @@ export class CoursePageComponent {
     console.log('Load courses');
   }
 
-  deleteCourse(id: string): void {
-    this.modal.showModal('Are you really want to delete course', () => {
-      this.coursesService.remove(id);
-    });
+  deleteCourse(course: Course): void {
+    this.modal.showModal(
+      'Delete course?',
+      `Are you really want to delete ${course.title}?`,
+      () => {
+        this.coursesService.remove(course.id);
+      }
+    );
   }
 }

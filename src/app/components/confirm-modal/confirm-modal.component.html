@@ -1,11 +1,17 @@
-<div class="backdrop"></div>
+<div class="backdrop" (click)="reject.emit()"></div>
 
 <div class="confirm-modal">
+  <div class="confirm-modal__header">
+    <h2>{{ title }}</h2>
+    <button class="btn btn_modal-close" (click)="reject.emit()">
+      <i class="material-icons">close</i>
+    </button>
+  </div>
   <div class="confirm-modal__content">
-    <p>{{ title }}</p>
+    <p>{{ text }}</p>
   </div>
   <div class="confirm-modal__footer">
-    <button class="btn btn_blue-big" (click)="confirm.emit()">Yes</button>
-    <button class="btn btn_blue-big" (click)="reject.emit()">No</button>
+    <button class="btn btn_green" (click)="confirm.emit()">Yes</button>
+    <button class="btn btn_gray" (click)="reject.emit()">No</button>
   </div>
 </div>

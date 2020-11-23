@@ -48,8 +48,8 @@ export class CoursesService {
 
   }
 
-  update(): void {
-
+  update(course: Course): void {
+    this.list.push(course);
   }
 
   remove(id: string): void {
