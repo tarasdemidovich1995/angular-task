@@ -1,0 +1,14 @@
+.pagination {
+  &__list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+  }
+  
+  &__elem {
+    margin-right: 5px;
+    &:last-child {
+      margin-right: 5px;
+    }
+  }
+}

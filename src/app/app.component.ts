@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { RefDirective } from './directives/ref.directive';
 import { ConfirmModalService } from './services/confirm-modal.service';
+import { LoaderService } from './services/loader.service';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +11,14 @@ import { ConfirmModalService } from './services/confirm-modal.service';
 export class AppComponent implements AfterViewInit {
   @ViewChild(RefDirective) modalDir: RefDirective;
 
-  constructor(private confirmModalService: ConfirmModalService) {}
+  constructor(
+    private confirmModalService: ConfirmModalService,
+    private loaderService: LoaderService
+  ) {}
 
   ngAfterViewInit(): void {
     this.confirmModalService.initDir(this.modalDir);
+    this.loaderService.initDir(this.modalDir);
   }
 
 }

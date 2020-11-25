@@ -1,0 +1,149 @@
+.btn {
+  padding: 0;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  background-color: transparent;
+
+  &_white {
+    color: rgba($color: #fff, $alpha: 1);
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    font-size: inherit;
+    & > i {
+      margin-right: 5px;
+    }
+    &:hover {
+      color: rgba($color: #fff, $alpha: 0.5);
+    }
+  }
+
+  &_green {
+    color: #ffffff;
+    border-radius: 3px;
+    background-color: rgba($color: #67a300, $alpha: 1);
+    height: 36px;
+    width: 73px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: rgba($color: #67a300, $alpha: 0.7);
+    }
+  }
+
+  &_blue-big {
+    border-radius: 3px;
+    background-color: rgba($color: #009ecc, $alpha: 1);
+    height: 36px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+
+    & > i {
+      margin-right: 5px;
+      font-size: 20px;
+    }
+
+    &:hover {
+      background-color: rgba($color: #009ecc, $alpha: 0.7);
+    }
+  }
+
+  &_blue-small {
+    border-radius: 3px;
+    background-color: rgba($color: #009ecc, $alpha: 1);
+    height: 24px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    font-size: 12px;
+
+    & > i {
+      margin-right: 5px;
+      font-size: 16px;
+    }
+
+    &:hover {
+      background-color: rgba($color: #009ecc, $alpha: 0.7);
+    }
+  }
+
+  &_clear {
+    color: blue;
+    background-color: #ffffff;
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &_gray {
+    border-radius: 3px;
+	  border: 1px solid #ACAFBF;
+    box-sizing: border-box;
+    color: #ACAFBF;
+	  border-width: 1px;
+	  border-style: solid;
+    height: 36px;
+    width: 70px;
+    background-color: transparent;
+
+    &:hover {
+      border: 1px solid #474A59;
+      color: #474A59;
+    }
+
+    &:disabled {
+      border: 1px solid #ACAFBF;
+      color: #ACAFBF;
+    }
+  }
+
+  &_modal-close {
+    background-color: transparent;
+    color: #ACAFBF;
+    &:hover {
+      color: #474A59;
+    }
+    .materail-icons {
+      font-size: 28px;
+    }
+  }
+
+  &_pagination {
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+    color: #ffffff;
+    background-color: rgba($color: #009ecc, $alpha: 1);
+    
+    &:hover {
+      background-color: rgba($color: #009ecc, $alpha: 0.7);
+    }
+  }
+
+  &_chip {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    
+    &__icon {
+      font-size: 20px;
+      color: #474a59;
+    }
+  }
+
+  &:disabled {
+    background-color: #ced0db !important;
+    cursor: auto !important;
+  }
+}

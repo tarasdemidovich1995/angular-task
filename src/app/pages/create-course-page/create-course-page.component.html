@@ -8,7 +8,7 @@
         type="text"
         id="title"
         placeholder="Text input"
-        [(ngModel)]="title"
+        [(ngModel)]="name"
       />
       <label class="form-control__label" for="title">Title</label>
     </div>
@@ -29,7 +29,7 @@
         type="number"
         id="duration"
         placeholder="minutes"
-        [(ngModel)]="duration"
+        [(ngModel)]="length"
       />
       <label class="form-control__label" for="duration">Duration</label>
     </div>
@@ -39,7 +39,7 @@
         class="form-control__input"
         type="date"
         id="date"
-        [(ngModel)]="creationDate"
+        [(ngModel)]="date"
       />
       <label class="form-control__label" for="duration">Date</label>
     </div>
@@ -50,9 +50,33 @@
         type="text"
         id="author"
         placeholder="Start typing"
-        [(ngModel)]="author"
+        autocomplete="off"
+        [(ngModel)]="authorSearch"
+        (focus)="isAuthorsOpen = true"
+        #authorsInput
       />
       <label class="form-control__label" for="author">Author</label>
+      <ul 
+        *ngIf="isAuthorsOpen"
+        class="form-control__authors"
+        (mouseleave)="isAuthorsOpen = false; authorsInput.blur(); authorSearch = '';"
+      >
+        <li
+          *ngFor="let author of authorsService.list | authorsFilter:authors:authorSearch"
+          class="form-control__authors-item"
+          (click)="addAuthor(author)"
+        >
+          {{author.name}}
+        </li>
+      </ul>
+      <div
+        class="form-control__chips"
+      >
+        <app-chip *ngFor="let author of authors"
+          [author]="author"
+          (removeHandler)="removeAuthor($event)"
+        ></app-chip>
+      </div>
     </div>
     <div class="create-course-page__form-controls">
       <button class="btn btn_green" (click)="save()">Save</button>

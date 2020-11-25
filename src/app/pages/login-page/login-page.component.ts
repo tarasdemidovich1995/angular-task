@@ -8,6 +8,9 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent {
+  public nickname = '';
+  public password = '';
+  public isLoading = false;
 
   constructor(
     private authService: AuthService,
@@ -15,7 +18,15 @@ export class LoginPageComponent {
   ) {}
 
   login(): void {
-    this.authService.login();
-    this.router.navigate(['/courses']);
+    this.isLoading = true;
+    this.authService.login({
+      login: this.nickname,
+      password: this.password
+    }).subscribe(() => {
+      this.router.navigate(['/courses']);
+      this.isLoading = false;
+    }, () => {
+      this.isLoading = false;
+    });
   }
 }

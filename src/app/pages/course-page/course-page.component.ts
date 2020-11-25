@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { Course } from 'src/app/interfaces';
 import { ConfirmModalService } from 'src/app/services/confirm-modal.service';
 import { CoursesService } from 'src/app/services/courses.service';
@@ -8,30 +10,34 @@ import { CoursesService } from 'src/app/services/courses.service';
   templateUrl: './course-page.component.html',
   styleUrls: ['./course-page.component.scss'],
 })
-export class CoursePageComponent {
-  public searchField = '';
-  public filterBy = '';
+export class CoursePageComponent implements OnInit, OnDestroy {
+
+  public searchStream$ = new Subject<string>();
+  private sub: Subscription;
 
   constructor(
     public coursesService: CoursesService,
     private modal: ConfirmModalService
   ) {}
 
-  searchHandler(): void {
-    this.filterBy = this.searchField;
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 
-  loadHandler(): void {
-    console.log('Load courses');
+  ngOnInit(): void {
+    this.coursesService.updateState('');
+    this.sub = this.searchStream$.pipe(
+      debounceTime(700)
+    ).subscribe((str) => {
+      this.coursesService.updateState(str);
+    });
   }
 
-  deleteCourse(course: Course): void {
+  public deleteCourse(course: Course): void {
     this.modal.showModal(
       'Delete course?',
-      `Are you really want to delete ${course.title}?`,
-      () => {
-        this.coursesService.remove(course.id);
-      }
+      `Are you really want to delete ${course.name}?`,
+      this.coursesService.remove(course.id)
     );
   }
 }

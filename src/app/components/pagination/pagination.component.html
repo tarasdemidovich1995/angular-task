@@ -1,0 +1,16 @@
+<div class="pagination">
+  <ul *ngIf="elemsCount" class="pagination__list">
+    <li 
+      class="pagination__elem"
+      *ngFor="let page of elemsCount | pagesArr:elemsPerPage" 
+    >
+      <button 
+        class="btn btn_pagination"
+        (click)="clickHandler.emit(page)"
+        [disabled]="activePage === page"
+      >
+        {{page + 1}}
+      </button>
+    </li>
+  </ul>
+</div>

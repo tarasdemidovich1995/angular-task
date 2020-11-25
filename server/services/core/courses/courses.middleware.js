@@ -8,8 +8,8 @@ module.exports = (server) => {
 	router.get('/courses', (req, res, next) => {
 		let url_parts = url.parse(req.originalUrl, true);
 		const query = url_parts.query;
-		const from = query.start || 0;
-		let	to = from + parseInt(query.count, 10);
+		const from = +query.start || 0;
+		let	to = from + +parseInt(query.count, 10);
 		const sort = query.sort;
 		const id = query.id;
 		let	courses = server.db.getState().courses;
@@ -45,12 +45,23 @@ module.exports = (server) => {
 		res.json(courses);
 	});
 
+	router.get('/courses/info', (req, res, next) => {
+		let url_parts = url.parse(req.originalUrl, true);
+		const query = url_parts.query;
+		let courses = server.db.getState().courses;
+		if (!!query.textFragment) {
+			courses = courses.filter((course) => course.name.concat(course.description).toUpperCase().indexOf(query.textFragment.toUpperCase()) >= 0);
+		}
+		res.json({
+			count: courses.length
+		});
+	})
+
 	router.get('/error', function(req, res, next) {
 		let url_parts = url.parse(req.originalUrl, true);
 		let query = url_parts.query;
 		res.status(parseInt(query.code, 10)).send({message: 'Error'});
 	});
 
-	
 	return router;
 };

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Provider } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +23,20 @@ import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.
 import { RefDirective } from './directives/ref.directive';
 import { MyTitleCasePipe } from './pipes/my-title-case.pipe';
 import { AuthGuard } from './services/auth.guard';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AlertComponent } from './components/alert/alert.component';
+import { LoaderComponent } from './components/loader/loader.component';
+import { AuthInterceptor } from './services/auth.interceptor';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { PagesArrPipe } from './pipes/pages-arr.pipe';
+import { ChipComponent } from './components/chip/chip.component';
+import { AuthorsFilterPipe } from './pipes/authors-filter.pipe';
+
+const INTERCEPTOR_PROVIDER: Provider = {
+  provide: HTTP_INTERCEPTORS,
+  multi: true,
+  useClass: AuthInterceptor,
+};
 
 @NgModule({
   declarations: [
@@ -45,9 +59,15 @@ import { AuthGuard } from './services/auth.guard';
     FilterPipe,
     ConfirmModalComponent,
     MyTitleCasePipe,
+    AlertComponent,
+    LoaderComponent,
+    PaginationComponent,
+    PagesArrPipe,
+    ChipComponent,
+    AuthorsFilterPipe,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
-  providers: [AuthGuard],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  providers: [AuthGuard, INTERCEPTOR_PROVIDER],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

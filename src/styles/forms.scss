@@ -1,0 +1,114 @@
+.form-control {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-top: 40px;
+  width: 100%;
+  z-index: 1;
+  color: #474A59;
+  
+  &_course-page {
+    margin: 0;
+  }
+
+  &_small {
+    width: 150px;
+  }
+
+  &_medium {
+    width: 320px;
+  }
+  
+  &__label {
+    position: absolute;
+    top: -5px;
+    font-weight: bold;
+    transform: translateY(-100%);
+    line-height: 18px;
+  }
+
+  &__info {
+    position: absolute;
+    right: 0;
+    top: -5px;
+    transform: translateY(-100%);
+    line-height: 18px;
+  }
+  
+  &__input, &__textarea {
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid #ced0db;
+    background-color: #ffffff;
+    color: #ced0db;
+    font-family: inherit;
+    font-size: 14px;
+    
+    &:focus {
+      outline: none;
+    }
+    
+    &::placeholder {
+      color: #ced0db;
+    }
+  }
+  
+  &__input {
+    height: 36px;
+    padding: 0 10px;
+
+    &_course-page {
+      width: 240px;
+    }
+  }
+
+  &__textarea {
+    height: 108px;
+    padding: 10px;
+    resize: none;
+  }
+
+  &__btn {
+    margin-left: 20px;
+  }
+
+  &__chips {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    min-height: 34px;
+    width: 680px;
+  }
+
+  &__authors {
+    list-style: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ced0db;
+    border-radius: 3px;
+    position: absolute;
+    top: 36px;
+    left: 0;
+    background-color: #ffffff;
+    z-index: 2;
+    max-height: 180px;
+    overflow-y: scroll;
+  }
+
+  &__authors-item {
+    border-bottom: 1px solid #ced0db;
+    padding-left: 10px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    
+    &:last-child {
+      border-bottom: 0;
+    }
+    &:hover {
+      background-color: #ced0db;
+    }
+  }
+}

@@ -48,13 +48,17 @@
 
   &__info {
     display: flex;
+    justify-content: space-between;
 
-    & > p {
+    &-left {
       margin-right: 40px;
     }
 
-    & > .btn:first-of-type {
-      margin-right: 10px;
+    &-right {
+      display: flex;
+      & > .btn:first-of-type {
+        margin-right: 10px;
+      }
     }
   }
 }

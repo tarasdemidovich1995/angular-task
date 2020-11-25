@@ -25,7 +25,7 @@ export class CourseComponent {
 
   goToCourse(): void {
     this.router.navigate(['/courses', this.course.id], {
-      fragment: this.course.title
+      fragment: this.course.name
     });
   }
 }

@@ -7,11 +7,8 @@
             class="form-control__input form-control__input_course-page"
             type="text"
             placeholder="Type to search"
-            [(ngModel)]="searchField"
+            (keyup)="searchStream$.next($event.target.value)"
           />
-          <button type="button" class="form-control__btn btn btn_green" (click)="searchHandler()">
-            Search
-          </button>
         </div>
       </div>
       <div class="course-page__header-bottom">
@@ -23,13 +20,18 @@
     </div>
     <div *ngIf="coursesService.list.length; else emptyList" class="course-page__content">
       <app-course
-        *ngFor="let course of coursesService.list | orderBy | filter: filterBy"
+        *ngFor="let course of coursesService.list | orderBy"
         [course]="course"
         (onDelete)="deleteCourse($event)"
       ></app-course>
     </div>
-    <div class="courder-page__footer">
-      <button class="btn btn_long" (click)="loadHandler()">Load more</button>
+    <div class="course-page__footer">
+      <app-pagination
+        [activePage]="coursesService.page"
+        [elemsPerPage]="coursesService.coursesOnPage"
+        [elemsCount]="coursesService.coursesCount"
+        (clickHandler)="coursesService.loadPage($event)"
+      ></app-pagination>
     </div>
   </div>
 </div>

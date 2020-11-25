@@ -1,6 +1,6 @@
 <div class="edit-course-page container">
-  <div class="edit-course-page__form">
-    <h2 class="edit-course-page__title">{{course.title}}</h2>
+  <div *ngIf="course" class="edit-course-page__form">
+    <h2 class="edit-course-page__title">{{course.name}}</h2>
     <div class="form-control">
       <small class="form-control__info">*required</small>
       <input
@@ -8,7 +8,7 @@
         type="text"
         id="title"
         placeholder="Text input"
-        [(ngModel)]="course.title"
+        [(ngModel)]="course.name"
       />
       <label class="form-control__label" for="title">Title</label>
     </div>
@@ -29,7 +29,7 @@
         type="number"
         id="duration"
         placeholder="minutes"
-        [(ngModel)]="course.duration"
+        [(ngModel)]="course.length"
       />
       <label class="form-control__label" for="duration">Duration</label>
     </div>
@@ -39,7 +39,7 @@
         class="form-control__input"
         type="date"
         id="date"
-        [(ngModel)]="course.creationDate"
+        [(ngModel)]="course.date"
       />
       <label class="form-control__label" for="duration">Date</label>
     </div>
@@ -50,9 +50,33 @@
         type="text"
         id="author"
         placeholder="Start typing"
-        />
-        <!-- [(ngModel)]="author" -->
+        autocomplete="off"
+        [(ngModel)]="authorSearch"
+        (focus)="isAuthorsOpen = true"
+        #authorsInput
+      />
       <label class="form-control__label" for="author">Author</label>
+      <ul 
+        *ngIf="isAuthorsOpen"
+        class="form-control__authors"
+        (mouseleave)="isAuthorsOpen = false; authorsInput.blur(); authorSearch = '';"
+      >
+        <li
+          *ngFor="let author of authorsService.list | authorsFilter:course.authors:authorSearch"
+          class="form-control__authors-item"
+          (click)="addAuthor(author)"
+        >
+          {{author.name}}
+        </li>
+      </ul>
+      <div
+        class="form-control__chips"
+      >
+        <app-chip *ngFor="let author of course.authors"
+          [author]="author"
+          (removeHandler)="removeAuthor($event)"
+        ></app-chip>
+      </div>
     </div>
     <div class="edit-course-page__form-controls">
       <button class="btn btn_green" (click)="save()">Save</button>

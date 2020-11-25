@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ConfirmModalComponent {
   @Input() title: string;
   @Input() text: string;
+  @Input() isDisabled: boolean;
   @Output() confirm: EventEmitter<void> = new EventEmitter<void>();
   @Output() reject: EventEmitter<void> = new EventEmitter<void>();
 }
