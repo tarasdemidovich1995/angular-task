@@ -1,0 +1,21 @@
+@import '../../../../styles/variables.scss';
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  color: $whiteColor;
+
+  &__icon {
+    margin-right: 5px;
+    font-size: 28px;
+    color: $logoColor;
+  }
+
+  &__title {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: $whiteColor;
+    text-decoration: none;
+  }
+}

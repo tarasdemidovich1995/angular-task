@@ -1,0 +1,40 @@
+<div class="course" [ngClass]="{ 'course_top-rated': course.isTopRated }">
+  <div class="course__header">
+    <div class="course__header-left">
+      <h2 class="course__title">
+        {{ course.name }}
+        <i *ngIf="course.isTopRated" class="material-icons course__top-rated-icon">star_border</i>
+      </h2>
+    </div>
+    <div class="course__header-right">
+      <p class="course__duration">
+        <i class="material-icons course__duration-icon"> access_time </i>
+        {{ course.length | transMin }}
+      </p>
+      <p class="course__date">
+        <i [appDateStyle]="course.date" class="material-icons course__date-icon"></i>
+        {{ course.date.format("ll") }}
+      </p>
+    </div>
+  </div>
+  <div class="course__info">
+    <div class="course__info-left">
+      <p>
+        {{ course.description }}
+      </p>
+    </div>
+    <div class="course__info-right">
+      <button
+        class="btn btn_blue-small course__btn"
+        (click)="goToCourse()"
+      >
+        <i class="material-icons btn_blue-small__icon">edit</i>
+        Edit
+      </button>
+      <button class="btn btn_blue-small course__btn" (click)="deleteHandler()">
+        <i class="material-icons btn_blue-small__icon">delete</i>
+        Delete
+      </button>
+    </div>
+  </div>
+</div>

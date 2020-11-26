@@ -1,0 +1,66 @@
+@import '../../../../../styles/variables.scss';
+
+.course {
+  border-radius: 6px;
+  padding: 20px;
+  background-color: $whiteColor;
+  box-shadow: 0 1px 2px 0 transparentize($shadowColor, .9),
+    0 2px 10px 0 transparentize($shadowColor, .85);
+  margin-top: 20px;
+
+  &_top-rated {
+    background-color: $blueColor3;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  &__title {
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+  }
+  
+  &__top-rated-icon {
+    color: $orangeColor;
+    margin-left: 10px;
+  }
+
+  &__header-right {
+    display: flex;
+    margin-bottom: 10px;
+  }
+  
+  &__duration, &__date {
+    color: #858997;
+    display: flex;
+    align-items: center;
+  }
+  
+  &__duration {
+    margin-right: 10px;
+  }
+
+  &__duration-icon, &__date-icon {
+    margin-right: 5px;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  &__info-left {
+    margin-right: 40px;
+  }
+  
+  &__info-right {
+    display: flex;
+  }
+  
+  &__btn:first-child {
+    margin-right: 10px;
+  }
+}

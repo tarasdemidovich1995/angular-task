@@ -1,0 +1,21 @@
+@import '../../../../../styles/variables.scss';
+
+.chip {
+  width: auto;
+  padding-left: 10px;
+  height: 24px;
+  border-radius: 18px;
+  background-color: $grayColor3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 2px 0 transparentize($shadowColor, .9),
+    0 2px 5px 0 transparentize($shadowColor, .85);
+  margin: 5px;
+
+  &__name {
+    font-size: 12px;
+    margin-right: 10px;
+    color: $darkColor;
+  }
+}

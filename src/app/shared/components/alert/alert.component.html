@@ -1,0 +1,15 @@
+<div class="alert" *ngIf="text">
+  <div class="alert__timer">
+    <div class="alert__timer-progress"></div>
+  </div>
+  <div
+    class="alert__content"
+    [ngClass]="{
+      'alert__content_success': type === types.SUCCESS,
+      'alert__content_warning': type === types.WARNING,
+      'alert__content_danger': type === types.DANGER
+    }"
+  >
+    <p>{{ text }}</p>
+  </div>
+</div>

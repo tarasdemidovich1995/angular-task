@@ -1,0 +1,13 @@
+<header class="app-header container">
+    <app-fake-logo></app-fake-logo>
+    <div class="app-header__controls" *ngIf="authService.isAuthenticated()">
+      <button class="btn btn_white app-header__btn" [routerLink]="['/login']">
+        <i class="material-icons btn_white__icon">person_outline</i>
+        User login
+      </button>
+      <button class="btn btn_white app-header__btn" (click)="logout()">
+        <i class="material-icons btn_white__icon">exit_to_app</i>
+        Log out
+      </button>
+    </div>
+</header>

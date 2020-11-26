@@ -5,7 +5,7 @@
   margin-top: 40px;
   width: 100%;
   z-index: 1;
-  color: #474A59;
+  color: $darkColor;
   
   &_course-page {
     margin: 0;
@@ -38,9 +38,9 @@
   &__input, &__textarea {
     width: 100%;
     border-radius: 3px;
-    border: 1px solid #ced0db;
-    background-color: #ffffff;
-    color: #ced0db;
+    border: 1px solid $grayColor1;
+    background-color: $whiteColor;
+    color: $grayColor1;
     font-family: inherit;
     font-size: 14px;
     
@@ -49,7 +49,7 @@
     }
     
     &::placeholder {
-      color: #ced0db;
+      color: $grayColor1;
     }
   }
   
@@ -85,19 +85,19 @@
     width: 100%;
     padding: 0;
     margin: 0;
-    border: 1px solid #ced0db;
+    border: 1px solid $grayColor1;
     border-radius: 3px;
     position: absolute;
     top: 36px;
     left: 0;
-    background-color: #ffffff;
+    background-color: $whiteColor;
     z-index: 2;
     max-height: 180px;
     overflow-y: scroll;
   }
 
   &__authors-item {
-    border-bottom: 1px solid #ced0db;
+    border-bottom: 1px solid $grayColor1;
     padding-left: 10px;
     height: 36px;
     display: flex;
@@ -108,7 +108,7 @@
       border-bottom: 0;
     }
     &:hover {
-      background-color: #ced0db;
+      background-color: $grayColor1;
     }
   }
 }

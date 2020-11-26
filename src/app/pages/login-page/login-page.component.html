@@ -1,37 +1,35 @@
-<div class="login-page">
-  <div class="container">
-    <form class="login-page__form">
-      <h1>Login</h1>
-      <div class="form-control">
-        <small class="form-control__info">*required</small>
-        <input
-          class="form-control__input"
-          type="text"
-          id="nickname"
-          name="nickname"
-          placeholder="Your nickname"
-          [(ngModel)]="nickname"
-          [disabled]="isLoading"
-        />
-        <label class="form-control__label" for="nickname">Nickname</label>
-      </div>
-      <div class="form-control">
-        <small class="form-control__info">*required</small>
-        <input
-          class="form-control__input"
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Your password"
-          [(ngModel)]="password"
-          [disabled]="isLoading"
-        />
-        <label class="form-control__label" for="Your password">Password</label>
-      </div>
-      <div class="login-page__form-footer">
-        <button class="btn btn_clear">Forget password?</button>
-        <button class="btn btn_green" (click)="login()" [disabled]="isLoading">Login</button>
-      </div>
-    </form>
-  </div>
+<div class="login-page container">
+  <form class="login-page__form">
+    <h1>Login</h1>
+    <div class="form-control">
+      <small class="form-control__info">*required</small>
+      <input
+        class="form-control__input"
+        type="text"
+        id="nickname"
+        name="nickname"
+        placeholder="Your nickname"
+        [(ngModel)]="nickname"
+        [disabled]="isLoading"
+      />
+      <label class="form-control__label" for="nickname">Nickname</label>
+    </div>
+    <div class="form-control">
+      <small class="form-control__info">*required</small>
+      <input
+        class="form-control__input"
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Your password"
+        [(ngModel)]="password"
+        [disabled]="isLoading"
+      />
+      <label class="form-control__label" for="Your password">Password</label>
+    </div>
+    <div class="login-page__form-footer">
+      <button class="btn btn_clear">Forget password?</button>
+      <button class="btn btn_green" (click)="login()" [disabled]="isLoading">Login</button>
+    </div>
+  </form>
 </div>

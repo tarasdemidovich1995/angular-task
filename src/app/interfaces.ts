@@ -54,10 +54,14 @@ export interface AuthRequest {
 }
 
 export interface Alert {
-  type: string;
+  type: EAlert;
   text: string;
 }
 
-export type AlertType = 'success' | 'warning' | 'danger';
+export enum EAlert {
+  SUCCESS,
+  WARNING,
+  DANGER
+}
 
 export type Direction = 'direct' | 'reverse';

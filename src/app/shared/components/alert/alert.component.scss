@@ -1,0 +1,46 @@
+@import '../../../../styles/variables.scss';
+
+.alert {
+  position: fixed;
+  z-index: $alertZIndex;
+  top: 100px;
+  right: 40px;
+
+  &__timer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: $whiteColor;
+    display: flex;
+  }
+
+  &__timer-progress {
+    height: 100%;
+    width: 100%;
+    background-color: $darkColor;
+  }
+  
+  &__content {
+    width: 150px;
+    min-height: 42px;
+    padding: 3px;
+    padding-top: 7px;
+    color: $whiteColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    text-align: center;
+    &_success {
+      background-color: $alertSuccessColor;
+    }
+    &_warning {
+      background-color: $alertWarningColor;
+    }
+    &_danger {
+      background-color: $alertDangerColor;
+    }
+  }
+}

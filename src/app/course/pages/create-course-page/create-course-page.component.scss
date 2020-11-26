@@ -1,0 +1,33 @@
+@import '../../../../styles/variables.scss';
+
+.create-course-page {
+  background-color: $whiteColor2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 180px);
+
+  &__form {
+    border-radius: 6px;
+	  background: #FFFFFF;
+    box-shadow: 0 1px 2px 0 transparentize($shadowColor, .9),
+      0 2px 10px 0 transparentize($shadowColor, .85);
+    width: 730px;
+    padding: 25px;
+  }
+
+  &__title {
+    font-size: 24px;
+    color: $darkColor;
+  }
+
+  &__form-controls {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  
+  &__btn:first-child {
+    margin-left: 10px;
+  }
+}

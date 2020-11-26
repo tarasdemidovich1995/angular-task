@@ -6,23 +6,25 @@
   background-color: transparent;
 
   &_white {
-    color: rgba($color: #fff, $alpha: 1);
+    color: transparentize($whiteColor, 0);
     background-color: transparent;
     display: flex;
     align-items: center;
     font-size: inherit;
-    & > i {
+    
+    &__icon {
       margin-right: 5px;
     }
+
     &:hover {
-      color: rgba($color: #fff, $alpha: 0.5);
+      color: transparentize($whiteColor, .5);
     }
   }
 
   &_green {
     color: #ffffff;
     border-radius: 3px;
-    background-color: rgba($color: #67a300, $alpha: 1);
+    background-color: transparentize($greenColor, 0);
     height: 36px;
     width: 73px;
     display: flex;
@@ -30,52 +32,52 @@
     justify-content: center;
 
     &:hover {
-      background-color: rgba($color: #67a300, $alpha: 0.7);
+      background-color: transparentize($greenColor, .3);
     }
   }
 
   &_blue-big {
     border-radius: 3px;
-    background-color: rgba($color: #009ecc, $alpha: 1);
+    background-color: transparentize($blueColor1, 0);
     height: 36px;
     padding: 0 10px;
     display: flex;
     align-items: center;
-    color: #fff;
+    color: $whiteColor;
 
-    & > i {
+    &__icon {
       margin-right: 5px;
       font-size: 20px;
     }
 
     &:hover {
-      background-color: rgba($color: #009ecc, $alpha: 0.7);
+      background-color: transparentize($blueColor1, .3);
     }
   }
 
   &_blue-small {
     border-radius: 3px;
-    background-color: rgba($color: #009ecc, $alpha: 1);
+    background-color: transparentize($blueColor1, 0);
     height: 24px;
     padding: 0 10px;
     display: flex;
     align-items: center;
-    color: #fff;
+    color: $whiteColor;
     font-size: 12px;
 
-    & > i {
+    &__icon {
       margin-right: 5px;
       font-size: 16px;
     }
 
     &:hover {
-      background-color: rgba($color: #009ecc, $alpha: 0.7);
+      background-color: transparentize($blueColor1, .3);
     }
   }
 
   &_clear {
-    color: blue;
-    background-color: #ffffff;
+    color: $blueColor2;
+    background-color: $whiteColor;
     text-decoration: underline;
     &:hover {
       text-decoration: none;
@@ -84,9 +86,9 @@
 
   &_gray {
     border-radius: 3px;
-	  border: 1px solid #ACAFBF;
+	  border: 1px solid $grayColor2;
     box-sizing: border-box;
-    color: #ACAFBF;
+    color: $grayColor2;
 	  border-width: 1px;
 	  border-style: solid;
     height: 36px;
@@ -94,23 +96,23 @@
     background-color: transparent;
 
     &:hover {
-      border: 1px solid #474A59;
-      color: #474A59;
+      border: 1px solid $darkColor;
+      color: $darkColor;
     }
 
     &:disabled {
-      border: 1px solid #ACAFBF;
-      color: #ACAFBF;
+      border: 1px solid $grayColor2;
+      color: $grayColor2;
     }
   }
 
   &_modal-close {
     background-color: transparent;
-    color: #ACAFBF;
+    color: $grayColor2;
     &:hover {
-      color: #474A59;
+      color: $darkColor;
     }
-    .materail-icons {
+    &__icon {
       font-size: 28px;
     }
   }
@@ -120,10 +122,10 @@
     height: 30px;
     border-radius: 3px;
     color: #ffffff;
-    background-color: rgba($color: #009ecc, $alpha: 1);
+    background-color: transparentize($blueColor1, 0);
     
     &:hover {
-      background-color: rgba($color: #009ecc, $alpha: 0.7);
+      background-color: transparentize($blueColor1, .3);
     }
   }
 
@@ -134,16 +136,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ffffff;
+    background-color: $whiteColor;
     
     &__icon {
       font-size: 20px;
-      color: #474a59;
+      color: $darkColor;
     }
   }
 
   &:disabled {
-    background-color: #ced0db !important;
+    background-color: $grayColor1 !important;
     cursor: auto !important;
   }
 }

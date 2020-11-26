@@ -1,0 +1,11 @@
+<div class="chip">
+  <div class="chip__name">
+    <h3>{{author.name}}</h3>
+  </div>
+  <button
+    class="btn btn_chip"
+    (click)="removeHandler.emit(author.id)"
+  >
+    <i class="material-icons btn_chip__icon">close</i>
+  </button>
+</div>
