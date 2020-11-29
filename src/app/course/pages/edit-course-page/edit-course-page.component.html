@@ -1,83 +1,13 @@
 <div class="edit-course-page container">
-  <div *ngIf="course" class="edit-course-page__form">
-    <h2 class="edit-course-page__title">{{course.name}}</h2>
-    <div class="form-control">
-      <small class="form-control__info">*required</small>
-      <input
-        class="form-control__input"
-        type="text"
-        id="title"
-        placeholder="Text input"
-        [(ngModel)]="course.name"
-      />
-      <label class="form-control__label" for="title">Title</label>
-    </div>
-    <div class="form-control">
-      <small class="form-control__info">*required</small>
-      <textarea
-        class="form-control__textarea"
-        id="description"
-        placeholder="Add description"
-        [(ngModel)]="course.description"
-      ></textarea>
-      <label class="form-control__label" for="description">Description</label>
-    </div>
-    <div class="form-control form-control_small">
-      <small class="form-control__info">*required</small>
-      <input
-        class="form-control__input"
-        type="number"
-        id="duration"
-        placeholder="minutes"
-        [(ngModel)]="course.length"
-      />
-      <label class="form-control__label" for="duration">Duration</label>
-    </div>
-    <div class="form-control form-control_small"> 
-      <small class="form-control__info">*required</small>
-      <input
-        class="form-control__input"
-        type="date"
-        id="date"
-        [(ngModel)]="course.date"
-      />
-      <label class="form-control__label" for="duration">Date</label>
-    </div>
-    <div class="form-control form-control_medium">
-      <small class="form-control__info">*required</small>
-      <input
-        class="form-control__input"
-        type="text"
-        id="author"
-        placeholder="Start typing"
-        autocomplete="off"
-        [(ngModel)]="authorSearch"
-        (focus)="isAuthorsOpen = true"
-        #authorsInput
-      />
-      <label class="form-control__label" for="author">Author</label>
-      <ul 
-        *ngIf="isAuthorsOpen"
-        class="form-control__authors"
-        (mouseleave)="isAuthorsOpen = false; authorsInput.blur(); authorSearch = '';"
-      >
-        <li
-          *ngFor="let author of authorsService.list | authorsFilter:course.authors:authorSearch"
-          class="form-control__authors-item"
-          (click)="addAuthor(author)"
-        >
-          {{author.name}}
-        </li>
-      </ul>
-      <div
-        class="form-control__chips"
-      >
-        <app-chip *ngFor="let author of course.authors"
-          [author]="author"
-          (removeHandler)="removeAuthor($event)"
-        ></app-chip>
-      </div>
-    </div>
+  <div
+    *ngIf="editedCourse$ | async"
+    class="edit-course-page__wrapper"
+  >
+    <h2 class="create-course-page__title">{{(editedCourse$ | async).name}}</h2>
+    <app-course-form
+      [course]="editedCourse$ | async"
+      [authors]="authors$ | async"
+    ></app-course-form>
     <div class="edit-course-page__form-controls">
       <button class="btn btn_green edit-course-page__btn" (click)="save()">Save</button>
       <button class="btn btn_gray edit-course-page__btn" [routerLink]="['/courses']">Cancel</button>

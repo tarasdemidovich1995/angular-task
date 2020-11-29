@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
 
-import { AuthorsService } from 'src/app/course/shared/services/authors.service';
-import { CoursesService } from 'src/app/course/shared/services/courses.service';
-
-import { Author } from 'src/app/interfaces';
+import { ActionPayload, CourseRequest } from 'src/app/interfaces';
+import { CoursesState } from '../../shared/store/course.reducers';
+import { coursesAuthorsSelector } from '../../shared/store/course.selectors';
+import { CoursesActionsTypes } from '../../shared/store/course.actions';
+import { CourseFormComponent } from '../../shared/components/course-form/course-form.component';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-create-course-page',
@@ -12,52 +15,35 @@ import { Author } from 'src/app/interfaces';
   styleUrls: ['./create-course-page.component.scss']
 })
 export class CreateCoursePageComponent implements OnInit {
-  public name: string;
-  public description: string;
-  public length: number;
-  public date: string;
-  public authors: Author[] = [];
-  public authorSearch = '';
-  public isAuthorsOpen = false;
+  @ViewChild(CourseFormComponent) courseForm: CourseFormComponent;
+
+  public newCourse: CourseRequest = {
+    id: Math.floor(Math.random() * 10000),
+    name: '',
+    date: moment().format('YYYY-MM-DD'),
+    description: '',
+    length: null,
+    authors: [],
+  };
+  public authors$ = this.store$.pipe(select(coursesAuthorsSelector));
 
   constructor(
-    private coursesService: CoursesService,
-    public authorsService: AuthorsService,
+    private store$: Store<CoursesState>,
     private router: Router,
   ) {}
 
   public ngOnInit(): void {
-    if (!this.authorsService.list.length) {
-      this.authorsService.update().subscribe({
-        error: () => {
-          this.router.navigate(['/courses']);
-        }
-      });
-    }
+    this.authors$.subscribe((authors) => {
+      if (!authors.length) {
+        this.store$.dispatch(new ActionPayload(CoursesActionsTypes.LOAD_AUTHORS));
+      }
+    });
   }
 
   public save(): void {
-    if (this.name && this.description && this.length && this.date && this.authors) {
-      this.coursesService.create({
-        name: this.name,
-        description: this.description,
-        length: this.length,
-        date: this.date,
-        id: Math.floor(Math.random() * 10000),
-        isTopRated: false,
-        authors: [],
-      }).subscribe(() => {
-        this.router.navigate(['/courses']);
-      });
-    }
-  }
-
-  public removeAuthor(id: string): void {
-    console.log(id);
-    this.authors = this.authors.filter(a => a.id !== id);
-  }
-
-  public addAuthor(author: Author): void {
-    this.authors.push(author);
+    this.store$.dispatch(
+      new ActionPayload(CoursesActionsTypes.CREATE_COURSE, this.courseForm.getUpdatedCourse())
+    );
+    this.router.navigate(['/courses']);
   }
 }

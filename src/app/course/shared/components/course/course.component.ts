@@ -5,7 +5,6 @@ import {
   Output,
 } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { Course } from 'src/app/interfaces';
 
 @Component({

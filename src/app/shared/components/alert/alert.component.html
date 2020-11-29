@@ -1,15 +1,15 @@
-<div class="alert" *ngIf="text">
+<div class="alert" *ngIf="(alert$ | async).message">
   <div class="alert__timer">
     <div class="alert__timer-progress"></div>
   </div>
   <div
     class="alert__content"
     [ngClass]="{
-      'alert__content_success': type === types.SUCCESS,
-      'alert__content_warning': type === types.WARNING,
-      'alert__content_danger': type === types.DANGER
+      'alert__content_success': (alert$ | async).class === types.SUCCESS,
+      'alert__content_warning': (alert$ | async).class === types.WARNING,
+      'alert__content_danger': (alert$ | async).class === types.DANGER
     }"
   >
-    <p>{{ text }}</p>
+    <p>{{ (alert$ | async).message }}</p>
   </div>
 </div>

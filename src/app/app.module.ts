@@ -16,6 +16,12 @@ import { AlertComponent } from 'src/app/shared/components/alert/alert.component'
 import { FakeLogoComponent } from 'src/app/shared/components/fake-logo/fake-logo.component';
 import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { reducers } from './shared/store';
+import { AlertEffects } from './shared/store/alert/alert.effects';
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -35,7 +41,18 @@ const INTERCEPTOR_PROVIDER: Provider = {
     AlertComponent,
     LoaderComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, SharedModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    SharedModule,
+    StoreModule.forRoot(reducers, {
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true
+      }
+    }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([AlertEffects])],
   providers: [AuthGuard, INTERCEPTOR_PROVIDER],
   bootstrap: [AppComponent],
 })

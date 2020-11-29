@@ -22,6 +22,11 @@ import { MyTitleCasePipe } from 'src/app/course/shared/pipes/my-title-case.pipe'
 import { OrderByPipe } from 'src/app/course/shared/pipes/order-by.pipe';
 import { PagesArrPipe } from 'src/app/course/shared/pipes/pages-arr.pipe';
 import { TransMinPipe } from 'src/app/course/shared/pipes/trans-min.pipe';
+import { StoreModule } from '@ngrx/store';
+import { COURSES_REDUCER_NODE, coursesReducer } from './shared/store/course.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { CourseEffects } from './shared/store/course.effects';
+import { CourseFormComponent } from './shared/components/course-form/course-form.component';
 
 @NgModule({
   declarations: [
@@ -39,11 +44,14 @@ import { TransMinPipe } from 'src/app/course/shared/pipes/trans-min.pipe';
     OrderByPipe,
     PagesArrPipe,
     TransMinPipe,
-    DateStyleDirective
+    DateStyleDirective,
+    CourseFormComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
+    StoreModule.forFeature(COURSES_REDUCER_NODE, coursesReducer),
+    EffectsModule.forFeature([CourseEffects]),
     RouterModule.forChild([
       {
         path: '',

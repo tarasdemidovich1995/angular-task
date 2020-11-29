@@ -18,17 +18,14 @@ export class ConfirmModalService {
     this.dir = dir;
   }
 
-  public showModal(title: string, text: string, confirm: Observable<void>): void {
+  public showModal(title: string, text: string, confirm: () => void): void {
     this.dir.containerRef.clear();
     const modalFactory = this.resolver.resolveComponentFactory(ConfirmModalComponent);
     const component = this.dir.containerRef.createComponent(modalFactory);
     component.instance.title = title;
     component.instance.text = text;
-    component.instance.isDisabled = false;
-    component.instance.confirm.pipe(
-      tap(() => { component.instance.isDisabled = true; }),
-      switchMap(() => confirm)
-    ).subscribe(() => {
+    component.instance.confirm.subscribe(() => {
+      confirm();
       this.dir.containerRef.clear();
     });
     component.instance.reject.subscribe(() => {

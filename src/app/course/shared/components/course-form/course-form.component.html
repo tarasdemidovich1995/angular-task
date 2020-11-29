@@ -1,0 +1,89 @@
+<form
+  *ngIf="course"
+  class="form"
+  [formGroup]="form"
+>
+
+  <div class="form-control">
+    <small class="form-control__info">*required</small>
+    <input
+      class="form-control__input"
+      type="text"
+      id="title"
+      placeholder="Text input"
+      formControlName="name"
+    />
+    <label class="form-control__label" for="title">Title</label>
+  </div>
+
+  <div class="form-control">
+    <small class="form-control__info">*required</small>
+    <textarea
+      class="form-control__textarea"
+      id="description"
+      placeholder="Add description"
+      formControlName="description"
+    ></textarea>
+    <label class="form-control__label" for="description">Description</label>
+  </div>
+
+  <div class="form-control form-control_small">
+    <small class="form-control__info">*required</small>
+    <input
+      class="form-control__input"
+      type="number"
+      id="duration"
+      placeholder="minutes"
+      formControlName="length"
+    />
+    <label class="form-control__label" for="duration">Duration</label>
+  </div>
+
+  <div class="form-control form-control_small"> 
+    <small class="form-control__info">*required</small>
+    <input
+      class="form-control__input"
+      type="date"
+      id="date"
+      formControlName="date"
+    />
+    <label class="form-control__label" for="duration">Date</label>
+  </div>
+
+  <div class="form-control form-control_medium"
+    *ngIf="authors"
+  >
+    <small class="form-control__info">*required</small>
+    <input
+      class="form-control__input"
+      type="text"
+      id="author"
+      placeholder="Start typing"
+      autocomplete="off"
+      (focus)="isAuthorsOpen = true"
+      #authorsInput
+    />
+    <label class="form-control__label" for="author">Author</label>
+    <ul 
+      *ngIf="isAuthorsOpen"
+      class="form-control__authors"
+      (mouseleave)="isAuthorsOpen = false; authorsInput.blur();"
+    >
+      <li
+        *ngFor="let author of authors | authorsFilter:form.get('authors').value:form.get('authorSearch').value"
+        class="form-control__authors-item"
+        (click)="addAuthor(author)"
+      >
+        {{author.name}}
+      </li>
+    </ul>
+    <div
+      class="form-control__chips"
+    >
+      <app-chip *ngFor="let author of form.get('authors').value"
+        [author]="author"
+        (removeHandler)="removeAuthor($event)"
+      ></app-chip>
+    </div>
+  </div>
+</form>

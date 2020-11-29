@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-
-import { AlertService } from 'src/app/shared/services/alert.service';
+import { ActionPayload } from 'src/app/interfaces';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { AlertActionTypes } from '../store/alert/alert.actions';
+import { AlertState } from '../store/alert/alert.reducers';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private alertService: AlertService,
+    private store$: Store<AlertState>
   ) {}
 
   public canActivate(
@@ -22,8 +24,7 @@ export class AuthGuard implements CanActivate {
     } else {
       this.authService.logout();
       this.router.navigate(['/login']);
-      this.alertService.warning('Please pass authorization');
+      this.store$.dispatch(new ActionPayload(AlertActionTypes.WARNING, 'Please pass the authorization'));
     }
   }
-
 }

@@ -5,7 +5,11 @@ import { debounceTime } from 'rxjs/operators';
 import { ConfirmModalService } from 'src/app/shared/services/confirm-modal.service';
 import { CoursesService } from 'src/app/course/shared/services/courses.service';
 
-import { Course } from 'src/app/interfaces';
+import { ActionPayload, Course } from 'src/app/interfaces';
+import { select, Store } from '@ngrx/store';
+import { CoursesState } from '../../shared/store/course.reducers';
+import { coursesCountSelector, coursesListSelector, coursesPageSelector } from '../../shared/store/course.selectors';
+import { CoursesActionsTypes } from '../../shared/store/course.actions';
 
 @Component({
   selector: 'app-course-page',
@@ -14,11 +18,15 @@ import { Course } from 'src/app/interfaces';
 })
 export class CoursePageComponent implements OnInit, OnDestroy {
 
-  public searchStream$ = new Subject<string>();
   private sub: Subscription;
+  public searchStream$ = new Subject<string>();
+  public list$ = this.store$.pipe(select(coursesListSelector));
+  public page$ = this.store$.pipe(select(coursesPageSelector));
+  public count$ = this.store$.pipe(select(coursesCountSelector));
 
   constructor(
     public coursesService: CoursesService,
+    private store$: Store<CoursesState>,
     private modal: ConfirmModalService
   ) {}
 
@@ -27,19 +35,27 @@ export class CoursePageComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.coursesService.updateState('');
+    this.store$.dispatch(new ActionPayload(CoursesActionsTypes.CHANGE_QUERY, ''));
     this.sub = this.searchStream$.pipe(
       debounceTime(700)
     ).subscribe((str) => {
-      this.coursesService.updateState(str);
+      this.store$.dispatch(new ActionPayload(CoursesActionsTypes.CHANGE_QUERY, str));
     });
   }
 
-  public deleteCourse(course: Course): void {
+  public openModal(course: Course): void {
     this.modal.showModal(
       'Delete course?',
       `Are you really want to delete ${course.name}?`,
-      this.coursesService.remove(course.id)
+      this.deleteCourse.bind(this, course.id)
     );
+  }
+
+  public deleteCourse(id: number): void {
+    this.store$.dispatch(new ActionPayload(CoursesActionsTypes.DELETE_COURSE, id));
+  }
+
+  public loadPage(page: number): void {
+    this.store$.dispatch(new ActionPayload(CoursesActionsTypes.CHANGE_PAGE, page));
   }
 }

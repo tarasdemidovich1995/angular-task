@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap, tap } from 'rxjs/operators';
-import * as moment from 'moment';
 
-import { CoursesService } from 'src/app/course/shared/services/courses.service';
-import { AuthorsService } from 'src/app/course/shared/services/authors.service';
-
-import { Author, CourseRequest } from 'src/app/interfaces';
+import { ActionPayload } from 'src/app/interfaces';
+import { select, Store } from '@ngrx/store';
+import { CoursesState } from '../../shared/store/course.reducers';
+import { coursesAuthorsSelector, editedCourseSelector } from '../../shared/store/course.selectors';
+import { CoursesActionsTypes } from '../../shared/store/course.actions';
+import { CourseFormComponent } from '../../shared/components/course-form/course-form.component';
 
 @Component({
   selector: 'app-edit-course-page',
@@ -14,54 +14,32 @@ import { Author, CourseRequest } from 'src/app/interfaces';
   styleUrls: ['./edit-course-page.component.scss']
 })
 export class EditCoursePageComponent implements OnInit {
-  public course: CourseRequest;
-  public isAuthorsOpen = false;
-  public authorSearch = '';
+  @ViewChild(CourseFormComponent) courseForm: CourseFormComponent;
+
+  public editedCourse$ = this.store$.pipe(select(editedCourseSelector));
+  public authors$ = this.store$.pipe(select(coursesAuthorsSelector));
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private coursesService: CoursesService,
-    public authorsService: AuthorsService,
+    private store$: Store<CoursesState>,
   ) {}
 
   public ngOnInit(): void {
-    this.route.params.pipe(
-      switchMap((params) => this.coursesService.getById(params.id)),
-      tap((course: CourseRequest) => {
-        this.course = {...course, date: moment(course.date).format('YYYY-MM-DD')};
-      }),
-    ).subscribe({
-      error: () => {
-        this.router.navigate(['/courses']);
+    this.authors$.subscribe((authors) => {
+      if (!authors.length) {
+        this.store$.dispatch(new ActionPayload(CoursesActionsTypes.LOAD_AUTHORS));
       }
     });
-    if (!this.authorsService.list.length) {
-      this.authorsService.update().subscribe({
-        error: () => {
-          this.router.navigate(['/courses']);
-        }
-      });
-    }
+    this.route.params.subscribe((params) => {
+      this.store$.dispatch(new ActionPayload(CoursesActionsTypes.LOAD_COURSE, params.id));
+    });
   }
 
   public save(): void {
-    this.coursesService.update(this.course).subscribe(
-      () => {
-        this.router.navigate(['/courses']);
-      },
-      () => {
-        this.router.navigate(['/courses']);
-      }
+    this.store$.dispatch(
+      new ActionPayload(CoursesActionsTypes.UPDATE_COURSE, this.courseForm.getUpdatedCourse())
     );
-  }
-
-  public removeAuthor(id: string): void {
-    console.log(id);
-    this.course.authors = this.course.authors.filter(a => a.id !== id);
-  }
-
-  public addAuthor(author: Author): void {
-    this.course.authors.push(author);
+    this.router.navigate(['/courses']);
   }
 }

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { COURSES_ON_PAGE } from 'src/app/config';
 
 @Component({
   selector: 'app-pagination',
@@ -7,7 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class PaginationComponent {
   @Input() activePage: number;
-  @Input() elemsPerPage: number;
   @Input() elemsCount: number;
   @Output() clickHandler = new EventEmitter<number>();
+  public elemsPerPage = COURSES_ON_PAGE;
 }

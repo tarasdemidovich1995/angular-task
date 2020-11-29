@@ -1,3 +1,6 @@
+import { Action } from '@ngrx/store';
+
+
 export interface Author {
   id: string;
   name: string;
@@ -65,3 +68,7 @@ export enum EAlert {
 }
 
 export type Direction = 'direct' | 'reverse';
+
+export class ActionPayload<T extends string, K> implements Action {
+  constructor(readonly type: T, public payload?: K) {}
+}
