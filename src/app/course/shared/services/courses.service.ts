@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CourseRequest, CoursesInfo } from '../../../interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { delay, tap } from 'rxjs/operators';
+import { delay } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { COURSES_ON_PAGE } from 'src/app/config';
 

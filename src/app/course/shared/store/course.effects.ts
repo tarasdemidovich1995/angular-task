@@ -35,7 +35,6 @@ export class CourseEffects {
         return new ActionPayload(CoursesActionsTypes.UPDATE_COUNT, info.count);
       }),
       catchError((error) => {
-        this.loaderService.hideLoader();
         this.store$.dispatch(new ActionPayload(AlertActionTypes.DANGER, error.error));
         return throwError(error);
       })
@@ -50,10 +49,10 @@ export class CourseEffects {
       switchMap(() => this.store$.pipe(select(coursesQuerySelector))),
       withLatestFrom(this.store$.pipe(select(coursesPageSelector))),
       switchMap(([query, page]) => this.coursesService.getList(page, query)),
+      tap(() => this.loaderService.hideLoader()),
       map((courses: CourseRequest[]) => {
         return new ActionPayload(CoursesActionsTypes.UPDATE_LIST, courses);
       }),
-      tap(() => this.loaderService.hideLoader()),
       catchError((error) => {
         this.loaderService.hideLoader();
         this.store$.dispatch(new ActionPayload(AlertActionTypes.DANGER, error.error));
@@ -68,10 +67,10 @@ export class CourseEffects {
       ofType(CoursesActionsTypes.LOAD_AUTHORS),
       tap(() => this.loaderService.showLoader()),
       switchMap(() => this.authorsService.getAuthors()),
+      tap(() => this.loaderService.hideLoader()),
       map((authors: Author[]) => {
         return new ActionPayload(CoursesActionsTypes.UPDATE_AUTHORS, authors);
       }),
-      tap(() => this.loaderService.hideLoader()),
       catchError((error) => {
         this.loaderService.hideLoader();
         this.store$.dispatch(new ActionPayload(AlertActionTypes.DANGER, error.error));
@@ -92,16 +91,16 @@ export class CourseEffects {
         withLatestFrom(this.store$.pipe(select(coursesListSelector)))
       )),
       debounce(([id, list]) => this.coursesService.remove(id)),
-      map(([id, list]) => {
-        return new ActionPayload(
-          CoursesActionsTypes.UPDATE_LIST,
-          list.filter((course) => course.id !== id)
-        );
-      }),
       tap(() => {
         this.loaderService.hideLoader();
         this.store$.dispatch(
           new ActionPayload(AlertActionTypes.SUCCESS, 'Course succesfully deleted')
+        );
+      }),
+      map(([id, list]) => {
+        return new ActionPayload(
+          CoursesActionsTypes.UPDATE_LIST,
+          list.filter((course) => course.id !== id)
         );
       }),
       catchError((error) => {
@@ -125,16 +124,16 @@ export class CourseEffects {
       debounce(([course, list]) => {
         return this.coursesService.update({...course, date: moment(course.date).toString()});
       }),
-      map(([course, list]) => {
-        return new ActionPayload(
-          CoursesActionsTypes.UPDATE_LIST,
-          [...list.filter((c) => c.id !== course.id), {...course, date: moment(course.date)}]
-        );
-      }),
       tap(() => {
         this.loaderService.hideLoader();
         this.store$.dispatch(
           new ActionPayload(AlertActionTypes.SUCCESS, 'Course succesfully updated')
+        );
+      }),
+      map(([course, list]) => {
+        return new ActionPayload(
+          CoursesActionsTypes.UPDATE_LIST,
+          [...list.filter((c) => c.id !== course.id), {...course, date: moment(course.date)}]
         );
       }),
       catchError((error) => {
@@ -153,13 +152,13 @@ export class CourseEffects {
       switchMap((action: ActionPayload<CoursesActionsTypes.LOAD_COURSE, number>) => {
         return this.coursesService.getById(action.payload);
       }),
+      tap(() => this.loaderService.hideLoader()),
       map((course: CourseRequest) => {
         return new ActionPayload(
           CoursesActionsTypes.CHANGE_EDIT_COURSE,
           {...course, date: moment(course.date).format('YYYY-MM-DD')}
         );
       }),
-      tap(() => this.loaderService.hideLoader()),
       catchError((error) => {
         this.loaderService.hideLoader();
         this.store$.dispatch(new ActionPayload(AlertActionTypes.DANGER, error.error));
@@ -168,19 +167,16 @@ export class CourseEffects {
     );
   }
 
-  @Effect()
-  public createCourse$(): Observable<Action> {
+  @Effect({dispatch: false})
+  public createCourse$(): Observable<any> {
     return this.actions$.pipe(
       ofType(CoursesActionsTypes.CREATE_COURSE),
       tap(() => this.loaderService.showLoader()),
       switchMap((action: ActionPayload<CoursesActionsTypes.CREATE_COURSE, CourseRequest>) => {
         return this.coursesService.create(action.payload);
       }),
-      switchMap(() => this.store$.pipe(select(coursesPageSelector))),
-      map((page) => {
-        return new ActionPayload(CoursesActionsTypes.CHANGE_PAGE, page);
-      }),
       tap(() => {
+        this.loaderService.hideLoader();
         this.store$.dispatch(
           new ActionPayload(AlertActionTypes.SUCCESS, 'Course succesfully created')
         );

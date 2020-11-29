@@ -7,7 +7,6 @@ import { CoursesState } from '../../shared/store/course.reducers';
 import { coursesAuthorsSelector } from '../../shared/store/course.selectors';
 import { CoursesActionsTypes } from '../../shared/store/course.actions';
 import { CourseFormComponent } from '../../shared/components/course-form/course-form.component';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-create-course-page',
@@ -19,12 +18,13 @@ export class CreateCoursePageComponent implements OnInit {
 
   public newCourse: CourseRequest = {
     id: Math.floor(Math.random() * 10000),
-    name: '',
-    date: moment().format('YYYY-MM-DD'),
-    description: '',
+    name: null,
+    date: null,
+    description: null,
     length: null,
     authors: [],
   };
+
   public authors$ = this.store$.pipe(select(coursesAuthorsSelector));
 
   constructor(

@@ -9,7 +9,13 @@
       [authors]="authors$ | async"
     ></app-course-form>
     <div class="create-course-page__form-controls">
-      <button class="btn btn_green create-course-page__btn" (click)="save()">Save</button>
+      <button 
+        class="btn btn_green create-course-page__btn"
+        [disabled]="courseForm ? courseForm.form.invalid : true"
+        (click)="save()"
+      >
+        Save
+      </button>
       <button class="btn btn_gray create-course-page__btn" [routerLink]="['/courses']">Cancel</button>
     </div>
   </div>

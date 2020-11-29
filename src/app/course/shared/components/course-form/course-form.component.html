@@ -5,7 +5,12 @@
 >
 
   <div class="form-control">
-    <small class="form-control__info">*required</small>
+    <small
+      *ngIf="form.get('name').invalid"
+      class="form-control__info"
+    >
+      *required
+    </small>
     <input
       class="form-control__input"
       type="text"
@@ -17,7 +22,12 @@
   </div>
 
   <div class="form-control">
-    <small class="form-control__info">*required</small>
+    <small
+      *ngIf="form.get('description').invalid"
+      class="form-control__info"
+    >
+      *required
+    </small>
     <textarea
       class="form-control__textarea"
       id="description"
@@ -28,7 +38,12 @@
   </div>
 
   <div class="form-control form-control_small">
-    <small class="form-control__info">*required</small>
+    <small
+      *ngIf="form.get('length').invalid"
+      class="form-control__info"
+    >
+      *required
+    </small>
     <input
       class="form-control__input"
       type="number"
@@ -40,7 +55,12 @@
   </div>
 
   <div class="form-control form-control_small"> 
-    <small class="form-control__info">*required</small>
+    <small 
+      *ngIf="form.get('date').invalid"
+      class="form-control__info"
+    >
+      *required
+    </small>
     <input
       class="form-control__input"
       type="date"
@@ -53,19 +73,25 @@
   <div class="form-control form-control_medium"
     *ngIf="authors"
   >
-    <small class="form-control__info">*required</small>
+    <small
+      *ngIf="form.get('authors').invalid"
+      class="form-control__info"
+    >
+      *At least one author
+    </small>
     <input
       class="form-control__input"
       type="text"
       id="author"
       placeholder="Start typing"
       autocomplete="off"
+      formControlName="authorSearch"
       (focus)="isAuthorsOpen = true"
       #authorsInput
     />
     <label class="form-control__label" for="author">Author</label>
     <ul 
-      *ngIf="isAuthorsOpen"
+      *ngIf="isAuthorsOpen && (authors | authorsFilter:form.get('authors').value:form.get('authorSearch').value).length"
       class="form-control__authors"
       (mouseleave)="isAuthorsOpen = false; authorsInput.blur();"
     >

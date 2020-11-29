@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Author, CourseRequest } from 'src/app/interfaces';
+import { MyValidators } from '../../my.validators';
 
 @Component({
   selector: 'app-course-form',
@@ -15,12 +16,12 @@ export class CourseFormComponent implements OnChanges {
   public ngOnChanges(): void {
     if (this.course) {
       this.form = new FormGroup({
-        name: new FormControl(this.course.name, Validators.required),
-        description: new FormControl(this.course.description, Validators.required),
-        date: new FormControl(this.course.date, Validators.required),
-        length: new FormControl(this.course.length, Validators.required),
-        authorSearch: new FormControl(''),
-        authors: new FormControl(this.course.authors)
+        name: new FormControl(this.course.name, [Validators.required]),
+        description: new FormControl(this.course.description, [Validators.required]),
+        date: new FormControl(this.course.date, [Validators.required]),
+        length: new FormControl(this.course.length, [Validators.required]),
+        authors: new FormControl(this.course.authors, [MyValidators.atLeastOneLength]),
+        authorSearch: new FormControl('')
       });
     }
   }
