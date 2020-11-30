@@ -1,0 +1,12 @@
+<div class="switcher"
+  (click)="toggle()"
+>
+  <div 
+    class="switcher__text"
+    [ngClass]="{'switcher__text_on': isOn}"
+  >{{ text }}</div>
+  <div 
+    class="switcher__slider"
+    [ngClass]="{'switcher__slider_on': isOn}"
+  ></div>
+</div>

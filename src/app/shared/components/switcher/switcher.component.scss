@@ -1,0 +1,42 @@
+@import '../../../../styles/variables.scss';
+
+.switcher {
+  width: 46px;
+  height: 22px;
+  border-radius: 21px;
+  background-color: $whiteColor;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+
+  &__text {
+    color: $darkColor;
+    transform: translate(0, -50%);
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    display: flex;
+    align-items: center;
+
+    &_on {
+      left: 8px;
+      right: auto;
+    }
+  }
+
+  &__slider {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: $darkColor;
+    transform: translate(0, -50%);
+    position: absolute;
+    top: 50%;
+    left: 2px;
+
+    &_on {
+      left: auto;
+      right: 2px;
+    }
+  }
+}

@@ -14,9 +14,14 @@
         [disabled]="courseForm ? courseForm.form.invalid : false"
         (click)="save()"
       >
-        Save
+        {{ 'button.save' | translate }}
       </button>
-      <button class="btn btn_gray edit-course-page__btn" [routerLink]="['/courses']">Cancel</button>
+      <button
+        class="btn btn_gray edit-course-page__btn"
+        [routerLink]="['/courses']"
+      >
+        {{ 'button.cancel' | translate }}
+      </button>
     </div>
   </div>
 </div>

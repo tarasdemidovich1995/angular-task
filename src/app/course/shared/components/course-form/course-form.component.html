@@ -9,16 +9,18 @@
       *ngIf="form.get('name').invalid"
       class="form-control__info"
     >
-      *required
+      *{{ 'form.required' | translate }}
     </small>
     <input
       class="form-control__input"
       type="text"
       id="title"
-      placeholder="Text input"
+      [placeholder]="'edit&create-course-page.title-placeholder' | translate"
       formControlName="name"
     />
-    <label class="form-control__label" for="title">Title</label>
+    <label class="form-control__label" for="title">
+      {{ 'edit&create-course-page.title' | translate }}
+    </label>
   </div>
 
   <div class="form-control">
@@ -26,15 +28,17 @@
       *ngIf="form.get('description').invalid"
       class="form-control__info"
     >
-      *required
+      *{{ 'form.required' | translate }}
     </small>
     <textarea
       class="form-control__textarea"
       id="description"
-      placeholder="Add description"
+      [placeholder]="'edit&create-course-page.description-placeholder' | translate"
       formControlName="description"
     ></textarea>
-    <label class="form-control__label" for="description">Description</label>
+    <label class="form-control__label" for="description">
+      {{ 'edit&create-course-page.description' | translate }}
+    </label>
   </div>
 
   <div class="form-control form-control_small">
@@ -42,16 +46,18 @@
       *ngIf="form.get('length').invalid"
       class="form-control__info"
     >
-      *required
+      *{{ 'form.required' | translate }}
     </small>
     <input
       class="form-control__input"
       type="number"
       id="duration"
-      placeholder="minutes"
+      [placeholder]="'edit&create-course-page.minutes' | translate"
       formControlName="length"
     />
-    <label class="form-control__label" for="duration">Duration</label>
+    <label class="form-control__label" for="duration">
+      {{ 'edit&create-course-page.duration' | translate }}
+    </label>
   </div>
 
   <div class="form-control form-control_small"> 
@@ -59,7 +65,7 @@
       *ngIf="form.get('date').invalid"
       class="form-control__info"
     >
-      *required
+      *{{ 'form.required' | translate }}
     </small>
     <input
       class="form-control__input"
@@ -67,7 +73,9 @@
       id="date"
       formControlName="date"
     />
-    <label class="form-control__label" for="duration">Date</label>
+    <label class="form-control__label" for="duration">
+      {{ 'edit&create-course-page.date' | translate }}
+    </label>
   </div>
 
   <div class="form-control form-control_medium"
@@ -77,19 +85,21 @@
       *ngIf="form.get('authors').invalid"
       class="form-control__info"
     >
-      *At least one author
+      *{{ 'edit&create-course-page.author-validator' | translate }}
     </small>
     <input
       class="form-control__input"
       type="text"
       id="author"
-      placeholder="Start typing"
+      [placeholder]="'edit&create-course-page.author-placeholder' | translate"
       autocomplete="off"
       formControlName="authorSearch"
       (focus)="isAuthorsOpen = true"
       #authorsInput
     />
-    <label class="form-control__label" for="author">Author</label>
+    <label class="form-control__label" for="author">
+      {{ 'edit&create-course-page.author' | translate }}
+    </label>
     <ul 
       *ngIf="isAuthorsOpen && (authors | authorsFilter:form.get('authors').value:form.get('authorSearch').value).length"
       class="form-control__authors"

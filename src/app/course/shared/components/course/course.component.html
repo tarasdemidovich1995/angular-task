@@ -3,7 +3,12 @@
     <div class="course__header-left">
       <h2 class="course__title">
         {{ course.name }}
-        <i *ngIf="course.isTopRated" class="material-icons course__top-rated-icon">star_border</i>
+        <i 
+          *ngIf="course.isTopRated"
+          class="material-icons course__top-rated-icon"
+        >
+          star_border
+        </i>
       </h2>
     </div>
     <div class="course__header-right">
@@ -29,11 +34,11 @@
         (click)="goToCourse()"
       >
         <i class="material-icons btn_blue-small__icon">edit</i>
-        Edit
+        {{ 'button.edit' | translate }}
       </button>
       <button class="btn btn_blue-small course__btn" (click)="deleteHandler()">
         <i class="material-icons btn_blue-small__icon">delete</i>
-        Delete
+        {{ 'button.delete' | translate }}
       </button>
     </div>
   </div>

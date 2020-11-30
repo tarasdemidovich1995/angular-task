@@ -3,7 +3,9 @@
     *ngIf="(authors$ | async).length" 
     class="create-course-page__wrapper"
   >
-    <h2 class="create-course-page__title">New course</h2>
+    <h2 class="create-course-page__title">
+      {{ 'edit&create-course-page.new-course' | translate }}
+    </h2>
     <app-course-form
       [course]="newCourse"
       [authors]="authors$ | async"
@@ -14,9 +16,14 @@
         [disabled]="courseForm ? courseForm.form.invalid : true"
         (click)="save()"
       >
-        Save
+        {{ 'button.save' | translate }}
       </button>
-      <button class="btn btn_gray create-course-page__btn" [routerLink]="['/courses']">Cancel</button>
+      <button 
+        class="btn btn_gray create-course-page__btn" 
+        [routerLink]="['/courses']"
+      >
+        {{ 'button.cancel' | translate }}
+      </button>
     </div>
   </div>
 </div>

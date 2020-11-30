@@ -8,8 +8,19 @@
   align-items: center;
   justify-content: space-between;
 
+  &__left {
+    display: flex;
+    align-items: center;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+  }
+
   &__controls {
     display: flex;
+    align-items: center;
   }
 
   &__btn {

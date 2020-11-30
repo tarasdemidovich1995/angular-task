@@ -11,7 +11,11 @@
     <p>{{ text }}</p>
   </div>
   <div class="confirm-modal__footer">
-    <button class="btn btn_green confirm-modal__btn" (click)="confirm.emit()">Yes</button>
-    <button class="btn btn_gray confirm-modal__btn" (click)="reject.emit()">No</button>
+    <button class="btn btn_green confirm-modal__btn" (click)="confirm.emit()">
+      {{ 'button.yes' | translate }}
+    </button>
+    <button class="btn btn_gray confirm-modal__btn" (click)="reject.emit()">
+      {{ 'button.no' | translate }}
+    </button>
   </div>
 </div>

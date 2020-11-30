@@ -27,6 +27,7 @@ import { COURSES_REDUCER_NODE, coursesReducer } from './shared/store/course.redu
 import { EffectsModule } from '@ngrx/effects';
 import { CourseEffects } from './shared/store/course.effects';
 import { CourseFormComponent } from './shared/components/course-form/course-form.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,10 @@ import { CourseFormComponent } from './shared/components/course-form/course-form
         ],
         canActivate: [AuthGuard],
       }
-    ])
+    ]),
+    TranslateModule.forChild({
+      extend: true,
+    })
   ],
   exports: [RouterModule],
   providers: [AuthGuard]

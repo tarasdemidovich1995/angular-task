@@ -1,6 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Provider } from '@angular/core';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AppComponent } from 'src/app//app.component';
@@ -16,18 +20,21 @@ import { AlertComponent } from 'src/app/shared/components/alert/alert.component'
 import { FakeLogoComponent } from 'src/app/shared/components/fake-logo/fake-logo.component';
 import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { EffectsModule } from '@ngrx/effects';
 import { reducers } from './shared/store';
 import { AlertEffects } from './shared/store/alert/alert.effects';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { SwitcherComponent } from './shared/components/switcher/switcher.component';
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
   multi: true,
   useClass: AuthInterceptor,
 };
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +47,7 @@ const INTERCEPTOR_PROVIDER: Provider = {
     ConfirmModalComponent,
     AlertComponent,
     LoaderComponent,
+    SwitcherComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +60,15 @@ const INTERCEPTOR_PROVIDER: Provider = {
       }
     }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([AlertEffects])],
+    EffectsModule.forRoot([AlertEffects]),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      },
+    })
+  ],
   providers: [AuthGuard, INTERCEPTOR_PROVIDER],
   bootstrap: [AppComponent],
 })

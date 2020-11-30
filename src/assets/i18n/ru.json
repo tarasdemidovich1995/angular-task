@@ -1,0 +1,55 @@
+{
+  "header": {
+    "logo": "Видео курс",
+    "user-login": "Войти",
+    "log-out": "Выйти"
+  },
+  "footer": {
+    "copyright": "Авторские права",
+    "videocourses": "видеокурсы",
+    "rights": "Все права защищены."
+  },
+  "login-page": {
+    "login": "Войти",
+    "forget-password": "Забыли пароль",
+    "nickname": "Имя",
+    "nickname-placeholder": "Ваше имя",
+    "password": "Пароль",
+    "password-plageholder": "Ваш пароль"
+  },
+  "courses-page": {
+    "courses": "Курсы",
+    "add-course": "Добавить курс",
+    "new": "Новый",
+    "no-data": "Нет курсов. Добавьте новые.",
+    "search": "Введите для поиска"
+  },
+  "edit&create-course-page": {
+    "new-course": "Новый курс",
+    "title": "Название",
+    "title-placeholder": "Название курса",
+    "description": "Описание",
+    "description-placeholder": "Добавить описание",
+    "duration": "Длительность",
+    "minutes": "минуты",
+    "date": "Дата",
+    "author": "Автор",
+    "author-validator": "Хотя бы один автор",
+    "author-placeholder": "Напечатайте автора"
+  },
+  "error-page": {
+    "text": "Упс, страница не найдена.",
+    "actions": "Вы можете перейти на страницу курсов кликну на логотип."
+  },
+  "form": {
+    "required": "Обязательно"
+  },
+  "button": {
+    "yes": "Да",
+    "no": "Нет",
+    "delete": "Удалить",
+    "edit": "Редактировать",
+    "cancel": "Назад",
+    "save": "Сохранить"
+  }
+}

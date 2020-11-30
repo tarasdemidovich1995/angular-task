@@ -6,7 +6,7 @@
           <input
             class="form-control__input form-control__input_course-page"
             type="text"
-            placeholder="Type to search"
+            [placeholder]="'courses-page.search' | translate"
             (keyup)="searchStream$.next($event.target.value)"
           />
         </div>
@@ -14,7 +14,7 @@
       <div class="course-page__header-bottom">
         <button class="btn btn_blue-big" [routerLink]="['/courses', 'new']">
           <i class="material-icons">add_circle_outline</i>
-          Add course
+          {{ 'courses-page.add-course' | translate }}
         </button>
       </div>
     </div>
@@ -37,6 +37,8 @@
 
 <ng-template #emptyList>
   <div class="course-page__empty">
-    <p>No data. Feel free to add new course.</p>
+    <p>
+      {{ 'courses-page.no-data' | translate }}
+    </p>
   </div>
 </ng-template>

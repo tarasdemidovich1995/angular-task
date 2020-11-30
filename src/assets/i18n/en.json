@@ -1,0 +1,55 @@
+{
+  "header": {
+    "logo": "Video course",
+    "user-login": "User login",
+    "log-out": "Log out"
+  },
+  "footer": {
+    "copyright": "Copyright",
+    "videocourses": "videocourses",
+    "rights": "All right reserved."
+  },
+  "login-page": {
+    "login": "Login",
+    "forget-password": "Forget password",
+    "nickname": "Nickname",
+    "nickname-placeholder": "Your nickname",
+    "password": "Password",
+    "password-plageholder": "Your password"
+  },
+  "courses-page": {
+    "courses": "Courses",
+    "add-course": "Add course",
+    "new": "New",
+    "no-data": "No data. Feel free to add new course.",
+    "search": "Type to search"
+  },
+  "edit&create-course-page": {
+    "new-course": "New course",
+    "title": "Title",
+    "title-placeholder": "Course name",
+    "description": "Description",
+    "description-placeholder": "Add description",
+    "duration": "Duration",
+    "minutes": "minutes",
+    "date": "Date",
+    "author": "Author",
+    "author-validator": "At least one author",
+    "author-placeholder": "Print author"
+  },
+  "error-page": {
+    "text": "Oops, page is not found.",
+    "actions": "You can navigate to main page click on logo."
+  },
+  "form": {
+    "required": "Required"
+  },
+  "button": {
+    "yes": "Yes",
+    "no": "No",
+    "delete": "Delete",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "save": "Save"
+  }
+}
